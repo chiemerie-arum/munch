@@ -1,0 +1,45 @@
+<template>
+  <v-card width="400" class="mx-auto mt-5 mb-5">
+    <v-card-title>
+      <h1 class="display-1">LOGIN</h1>
+    </v-card-title>
+    <v-card-text>
+      <v-form>
+        <v-text-field label="Username" prepend-icon="mdi-account-circle" />
+        <v-text-field
+          :type="showPassword ? 'text' : 'password'"
+          label="Password"
+          prepend-icon="mdi-lock"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword"
+        />
+
+        <v-container>
+          <v-row>
+            <v-col>
+              <v-btn color="info">Login</v-btn>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col>
+              <v-btn to="/register" class="link" color="success"
+                >Register</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-form>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      showPassword: false,
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped></style>

@@ -1,15 +1,21 @@
 <template>
-  <hello-world />
+  <div>
+    <RestaurantCard />
+    <!-- <div class="card"></div> -->
+  </div>
 </template>
 
-<script>
-import HelloWorld from "../components/HelloWorld";
-
+<script lang="ts">
+import RestaurantCard from "../components/RestaurantCard.vue";
 export default {
   name: "Home",
-
   components: {
-    HelloWorld,
+    RestaurantCard,
+  },
+  created() {
+    this.$store.dispatch("restaurant/fetchRestaurants");
   },
 };
 </script>
+
+<style lang="scss" scoped></style>

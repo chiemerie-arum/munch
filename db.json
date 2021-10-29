@@ -1,0 +1,200 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Buger House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "meals": [1, 2, 3, 4, 5],
+      "minimumOrderAmount": 15
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Mike Farmer",
+      "address": {
+        "streetAndHouseNumber": "Borgfelder 24",
+        "additional": "",
+        "zipCode": 20099,
+        "city": "Hamburg",
+        "Country": "Germany"
+      },
+      "email": "mike.farmer@yahoo.com",
+      "password": "12345mike",
+      "gender": "Male",
+      "birthday": "1995-12-17T03:24:00",
+      "role": "CUSTOMER"
+    }
+  ],
+  "meals": [
+    {
+      "id": 1,
+      "name": "Cheese Crispy Chicken",
+      "description": "with Cheese",
+      "poductInfo": {
+        "intolerance": ["With colorant", "Contains acidifiers"],
+        "allergen": [
+          "Contains cereals and products thereof containing gluten",
+          "wheat",
+          "Contains milk and products thereof (including lactose)",
+          "Contains sesame seeds and products thereof"
+        ]
+      },
+      "choiceOf": [
+        {
+          "name": "with pork, extra",
+          "price": 3.79
+        },
+        {
+          "name": "with chicken, extra",
+          "price": 4.89
+        },
+        {
+          "name": "with beef, extra",
+          "price": 2.99
+        }
+      ],
+      "additionalOptions": [],
+      "mealImage": "",
+      "restaurantId": 1,
+      "price": 9.99
+    },
+    {
+      "id": 2,
+      "name": "James Dean Burger",
+      "description": "",
+      "poductInfo": {
+        "intolerance": ["With colorant", "Contains acidifiers"],
+        "allergen": [
+          "Contains cereals and products thereof containing gluten",
+          "wheat",
+          "Contains milk and products thereof (including lactose)",
+          "Contains sesame seeds and products thereof"
+        ]
+      },
+      "choiceOf": [
+        {
+          "name": "with curry, extra",
+          "price": 2.79
+        },
+        {
+          "name": "with egg, extra",
+          "price": 0.89
+        },
+        {
+          "name": "with vegetables, extra",
+          "price": 1.99
+        }
+      ],
+      "additionalOptions": [],
+      "mealImage": "",
+      "restaurantId": 1,
+      "price": 15.99
+    },
+    {
+      "id": 3,
+      "name": "Prince Burger",
+      "description": "",
+      "poductInfo": {
+        "intolerance": ["With colorant", "Contains acidifiers"],
+        "allergen": [
+          "Contains cereals and products thereof containing gluten",
+          "wheat",
+          "Contains milk and products thereof (including lactose)",
+          "Contains sesame seeds and products thereof"
+        ]
+      },
+      "choiceOf": [
+        {
+          "name": "with burger, extra",
+          "price": 1.99
+        },
+        {
+          "name": "with beef, extra",
+          "price": 3.99
+        },
+        {
+          "name": "with crispy chicken, extra",
+          "price": 4.99
+        }
+      ],
+      "additionalOptions": [],
+      "mealImage": "",
+      "restaurantId": 1,
+      "price": 11.09
+    },
+    {
+      "id": 4,
+      "name": "Al Pacino Burger",
+      "description": "with Cheese",
+      "poductInfo": {
+        "intolerance": ["With colorant", "Contains acidifiers"],
+        "allergen": [
+          "Contains cereals and products thereof containing gluten",
+          "wheat",
+          "Contains milk and products thereof (including lactose)",
+          "Contains sesame seeds and products thereof"
+        ]
+      },
+      "choiceOf": [
+        {
+          "name": "with bacon, extra",
+          "price": 1.49
+        },
+        {
+          "name": "with cheese, extra",
+          "price": 0.99
+        },
+        {
+          "name": "with crispy chicken, extra",
+          "price": 4.99
+        }
+      ],
+      "additionalOptions": [],
+      "mealImage": "",
+      "restaurantId": 1,
+      "price": 5.59
+    },
+    {
+      "id": 5,
+      "name": "Extra Burger",
+      "description": "",
+      "poductInfo": {
+        "intolerance": ["With colorant", "Contains acidifiers"],
+        "allergen": [
+          "Contains cereals and products thereof containing gluten",
+          "wheat",
+          "Contains milk and products thereof (including lactose)",
+          "Contains sesame seeds and products thereof"
+        ]
+      },
+      "choiceOf": [
+        {
+          "name": "with bacon, extra",
+          "price": 1.49
+        },
+        {
+          "name": "with cheese, extra",
+          "price": 0.99
+        },
+        {
+          "name": "with crispy chicken, extra",
+          "price": 4.99
+        }
+      ],
+      "additionalOptions": [],
+      "mealImage": "",
+      "restaurantId": 1,
+      "price": 16.99
+    }
+  ]
+}
