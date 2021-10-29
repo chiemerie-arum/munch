@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title>Munchit</v-toolbar-title>
+      <v-toolbar-title>Munch</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn v-if="$vuetify.breakpoint.lgAndUp" text rounded to="/" class="mr-4"
         >Home</v-btn
