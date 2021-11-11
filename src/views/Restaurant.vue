@@ -1,9 +1,20 @@
 <template>
-  <h1>Restaurant</h1>
+  <h1>Restaurant {{ restaurant.id }}</h1>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "vuex";
+export default {
+  name: "Restaurant",
+  props: ["id"],
+  created() {
+    this.setRestaurant(this.id);
+  },
+  computed: mapState({
+    restaurant: (state) => state.restaurant.restaurant,
+  }),
+  methods: mapActions("restaurant", ["setRestaurant"]),
+};
 </script>
 
 <style lang="scss" scoped></style>

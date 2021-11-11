@@ -14,7 +14,98 @@
       "email": "bugerhouse@muchit.com",
       "phoneNumber": "+4917545843209",
       "meals": [1, 2, 3, 4, 5],
+      "ratingsNumber": 400,
+      "ratingAverage": 4.5,
       "minimumOrderAmount": 15
+    },
+    {
+      "id": 2,
+      "name": "Buger  tow House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "meals": [1, 2, 3, 4, 5],
+      "ratingsNumber": 201,
+      "ratingAverage": 4.6,
+      "minimumOrderAmount": 11
+    },
+    {
+      "id": 3,
+      "name": "Buger  tow House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "meals": [1, 2, 3, 4, 5],
+      "ratingsNumber": 120,
+      "ratingAverage": 4.7,
+      "minimumOrderAmount": 8
+    },
+    {
+      "id": 4,
+      "name": "Buger  tow House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "meals": [1, 2, 3, 4, 5],
+      "ratingsNumber": 522,
+      "ratingAverage": 4.8,
+      "minimumOrderAmount": 16
+    },
+    {
+      "id": 5,
+      "name": "Buger  tow House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "meals": [1, 2, 3, 4, 5],
+      "ratingsNumber": 85,
+      "ratingAverage": 4.9,
+      "minimumOrderAmount": 20
+    },
+    {
+      "id": 6,
+      "name": "Buger  tow House",
+      "description": "German, Burgers, Hotdog",
+      "Address": {
+        "streetAndHouseNumber": "Burgstrasse 24",
+        "additional": "",
+        "zipCode": 20544,
+        "city": "Hamburg",
+        "country": "Germany"
+      },
+      "email": "bugerhouse@muchit.com",
+      "phoneNumber": "+4917545843209",
+      "ratingsNumber": 1230,
+      "ratingAverage": 4,
+      "minimumOrderAmount": 7
     }
   ],
   "users": [

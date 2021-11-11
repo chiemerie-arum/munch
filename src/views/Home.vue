@@ -1,19 +1,27 @@
 <template>
   <div>
-    <RestaurantCard />
-    <!-- <div class="card"></div> -->
+    <RestaurantCard
+      v-for="restaurant in restaurants"
+      :key="restaurant.id"
+      :restaurant="restaurant"
+    />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import RestaurantCard from "../components/RestaurantCard.vue";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
     RestaurantCard,
   },
-  created() {
+  mounted() {
     this.$store.dispatch("restaurant/fetchRestaurants");
+  },
+
+  computed: {
+    ...mapState("restaurant", ["restaurants"]),
   },
 };
 </script>

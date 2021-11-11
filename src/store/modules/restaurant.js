@@ -24,9 +24,17 @@ export default {
         console.log(error);
       }
     },
-    async setRestaurant({ commit }, restaurant) {
+    async setRestaurant({ commit, getters }, id) {
       try {
-        await commit("SET_RESTAURANT", restaurant);
+        const restaurant = getters.getRestaurantById(id);
+        if (restaurant) {
+          await commit("SET_RESTAURANT", restaurant);
+        } else {
+          const restaurants = await RestaurantService.getRestaurants();
+          const restaurant = getters.getRestaurantById(id);
+          await commit("SET_RESTAURANTS", restaurants.data);
+          await commit("SET_RESTAURANT", restaurant);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -35,6 +43,9 @@ export default {
   getters: {
     getAllRestaurants: (state) => {
       return state.restaurants;
+    },
+    getRestaurantById: (state) => (id) => {
+      return state.restaurants.find((restaurant) => restaurant.id === id);
     },
   },
 };
