@@ -10,7 +10,7 @@
           <StarRating
             read-only
             active-color="#f86600"
-            star-size="13"
+            :star-size="13"
             :show-rating="false"
             :increment="0.1"
             :rating="restaurant.ratingAverage"

@@ -15,10 +15,14 @@ export default {
     },
   },
   actions: {
-    async fetchMeals({ commit }) {
+    async fetchMeals({ commit }, restaurantId) {
       try {
-        const meals = await MealService.getMeals();
-        await commit("SET_MEAL", meals.data);
+        const allMeals = await MealService.getMeals();
+        const meals = allMeals.data.filter(
+          (meal) => meal.restaurantId === Number(restaurantId)
+        );
+
+        await commit("SET_MEALS", meals);
       } catch (error) {
         console.log(error);
       }

@@ -19,7 +19,6 @@ export default {
       try {
         const restaurants = await RestaurantService.getRestaurants();
         await commit("SET_RESTAURANTS", restaurants.data);
-        console.log(restaurants.data);
       } catch (error) {
         console.log(error);
       }

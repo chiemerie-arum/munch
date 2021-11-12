@@ -48,7 +48,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <div class="header">
+    <div class="header pb-0">
       <h1>Order from 198 Countries</h1>
     </div>
   </div>
