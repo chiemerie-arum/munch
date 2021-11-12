@@ -29,10 +29,9 @@ export default {
         if (restaurant) {
           await commit("SET_RESTAURANT", restaurant);
         } else {
-          const restaurants = await RestaurantService.getRestaurants();
           const restaurant = getters.getRestaurantById(id);
-          await commit("SET_RESTAURANTS", restaurants.data);
           await commit("SET_RESTAURANT", restaurant);
+          console.log(restaurant);
         }
       } catch (error) {
         console.log(error);
@@ -44,7 +43,7 @@ export default {
       return state.restaurants;
     },
     getRestaurantById: (state) => (id) => {
-      return state.restaurants.find((restaurant) => restaurant.id === id);
+      return state.restaurants.find((restaurant) => restaurant.id == id);
     },
   },
 };

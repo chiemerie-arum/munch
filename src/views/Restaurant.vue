@@ -27,14 +27,17 @@ import StarRating from "vue-star-rating";
 import MealCard from "../components/MealCard.vue";
 export default {
   name: "Restaurant",
-  props: ["id"],
   components: {
     MealCard,
     StarRating,
   },
-  mounted() {
-    this.$store.dispatch("meal/fetchMeals", this.id);
-    this.$store.dispatch("restaurant/setRestaurant", this.id);
+  async mounted() {
+    await this.$store.dispatch("restaurant/fetchRestaurants");
+    this.$store.dispatch("meal/fetchMeals", this.$route.params.id);
+    await this.$store.dispatch(
+      "restaurant/setRestaurant",
+      this.$route.params.id
+    );
   },
   computed: mapState({
     ...mapState("meal", ["meals"]),

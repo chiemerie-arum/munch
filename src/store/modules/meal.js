@@ -1,4 +1,5 @@
 import MealService from "../../utils/services/MealService";
+import { Meal } from "../../models/meal";
 
 export default {
   namespaced: true,
@@ -18,9 +19,11 @@ export default {
     async fetchMeals({ commit }, restaurantId) {
       try {
         const allMeals = await MealService.getMeals();
-        const meals = allMeals.data.filter(
+        let meals = allMeals.data.filter(
           (meal) => meal.restaurantId === Number(restaurantId)
         );
+        meals = Meal.toList(meals);
+        console.log(meals);
 
         await commit("SET_MEALS", meals);
       } catch (error) {
@@ -33,6 +36,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    setMealsInactive({ state }) {
+      state.meals.forEach((meal) => {
+        meal.isActive = false;
+      });
     },
   },
   getters: {

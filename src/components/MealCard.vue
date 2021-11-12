@@ -26,32 +26,8 @@
         </h3>
       </div>
     </div>
-    <div class="side-dish">
-      Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. At id sit
-      fugit maxime libero vel cumque voluptates veritatis laboriosam sequi non
-      commodi laborum quod voluptas ab iure, beatae numquam perspiciatis. Lorem
-      ipsum dolor sit amet consectetur adipisicing elit. Odit repudiandae
-      nesciunt dignissimos doloremque quo suscipit non fuga, vitae asperiores
-      aut harum libero voluptates doloribus dolore assumenda natus ad enim
-      nulla. Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. At id
-      sit fugit maxime libero vel cumque voluptates veritatis laboriosam sequi
-      non commodi laborum quod voluptas ab iure, beatae numquam perspiciatis.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repudiandae
-      nesciunt dignissimos doloremque quo suscipit non fuga, vitae asperiores
-      aut harum libero voluptates doloribus dolore assumenda natus ad enim
-      nulla. Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. At id
-      sit fugit maxime libero vel cumque voluptates veritatis laboriosam sequi
-      non commodi laborum quod voluptas ab iure, beatae numquam perspiciatis.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repudiandae
-      nesciunt dignissimos doloremque quo suscipit non fuga, vitae asperiores
-      aut harum libero voluptates doloribus dolore assumenda natus ad enim
-      nulla. Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. At id
-      sit fugit maxime libero vel cumque voluptates veritatis laboriosam sequi
-      non commodi laborum quod voluptas ab iure, beatae numquam perspiciatis.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repudiandae
-      nesciunt dignissimos doloremque quo suscipit non fuga, vitae asperiores
-      aut harum libero voluptates doloribus dolore assumenda natus ad enim
-      nulla.
+    <div v-if="meal.isActive" class="side-dish">
+      {{ meal.choiceOf }}
     </div>
   </div>
 </template>
@@ -61,7 +37,6 @@ export default {
   name: "MealCard",
   data() {
     return {
-      isActive: false,
       sideDish: null,
       mealId: `side-dish-${this.meal.id}`,
     };
@@ -77,14 +52,9 @@ export default {
   },
   methods: {
     toggleSideDishes() {
-      this.isActive = this.isActive ? false : true;
-      console.log(this.sideDish);
-
-      if (this.sideDish.style.maxHeight) {
-        this.sideDish.style.maxHeight = null;
-      } else {
-        this.sideDish.style.maxHeight = this.sideDish.scrollHeight + "px";
-      }
+      let currState = this.meal.isActive;
+      this.$store.dispatch("meal/setMealsInactive");
+      this.meal.isActive = !currState;
     },
   },
 };
@@ -155,9 +125,7 @@ export default {
   }
   .side-dish {
     padding: 0 18px;
-    max-height: 0;
     transition: max-height 0.2s ease-out;
-    overflow: hidden;
     background-color: #f8f5f2;
   }
   .restaurant:after {
