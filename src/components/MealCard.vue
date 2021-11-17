@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="restaurant mb-2"
-    @click="toggleSideDishes"
-    :class="{ active: isActive }"
-  >
-    <div class="restaurant__details ml-3">
+  <div class="restaurant mb-2" :class="{ active: meal.isActive }" ref="card">
+    <div @click="toggleSideDishes" class="restaurant__details ml-3">
       <div>
         <h3 class="font-weight-bold restaurant__title">
           {{ meal.name }}
@@ -26,8 +22,27 @@
         </h3>
       </div>
     </div>
-    <div v-if="meal.isActive" class="side-dish">
-      {{ meal.choiceOf }}
+    <div v-if="meal.isActive" class="side-dish" ref="sideDish">
+      <template>
+        <v-container fluid>
+          <div
+            v-for="(sideDish, index) in meal.sideDishes"
+            :key="sideDish.id + index"
+            class="mb-5"
+          >
+            <label>{{ sideDish.name }}</label>
+            <v-checkbox
+              v-for="option in sideDish.options"
+              :key="meal.id + option.name"
+              dense
+              hide-details
+              v-model="extras"
+              :label="option.name"
+              :value="option.name"
+            ></v-checkbox>
+          </div>
+        </v-container>
+      </template>
     </div>
   </div>
 </template>
@@ -37,8 +52,8 @@ export default {
   name: "MealCard",
   data() {
     return {
-      sideDish: null,
-      mealId: `side-dish-${this.meal.id}`,
+      extras: [],
+      selectedElement: null,
     };
   },
   props: {
@@ -47,14 +62,28 @@ export default {
       requied: true,
     },
   },
-  mounted() {
-    this.sideDish = document.querySelector(".side-dish");
-  },
   methods: {
     toggleSideDishes() {
+      const el = this.$refs.card;
       let currState = this.meal.isActive;
       this.$store.dispatch("meal/setMealsInactive");
       this.meal.isActive = !currState;
+      console.log(el);
+      if (this.selectedElement !== el) {
+        this.scrollToTargetAdjusted(el);
+        this.selectedElement = el;
+      }
+    },
+    scrollToTargetAdjusted(el) {
+      var element = el;
+      var headerOffset = 65;
+      var elementPosition = element.getBoundingClientRect().top;
+      var offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     },
   },
 };
@@ -91,10 +120,7 @@ export default {
   }
 
   &__details {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 100%;
   }
 
   &__logo {
@@ -126,7 +152,9 @@ export default {
   .side-dish {
     padding: 0 18px;
     transition: max-height 0.2s ease-out;
+    overflow: hidden;
     background-color: #f8f5f2;
+    width: 100%;
   }
   .restaurant:after {
     content: "\02795"; /* Unicode character for "plus" sign (+) */
@@ -141,7 +169,7 @@ export default {
   }
 
   .active:after {
-    content: "\02716"; /* Unicode character for "minus" sign (-) */
+    content: "\02716"; /* Unicode character for "minus" sign (x) */
   }
 }
 </style>

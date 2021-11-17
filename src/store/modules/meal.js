@@ -1,4 +1,5 @@
 import MealService from "../../utils/services/MealService";
+import SideDishService from "../../utils/services/SideDishService";
 import { Meal } from "../../models/meal";
 
 export default {
@@ -6,6 +7,7 @@ export default {
   state: {
     meals: [],
     meal: {},
+    sideDishes: [],
   },
   mutations: {
     SET_MEALS(state, meals) {
@@ -19,10 +21,11 @@ export default {
     async fetchMeals({ commit }, restaurantId) {
       try {
         const allMeals = await MealService.getMeals();
+        const sideDishes = await SideDishService.getSideDishes();
         let meals = allMeals.data.filter(
           (meal) => meal.restaurantId === Number(restaurantId)
         );
-        meals = Meal.toList(meals);
+        meals = Meal.toList(meals, sideDishes.data);
         console.log(meals);
 
         await commit("SET_MEALS", meals);

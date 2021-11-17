@@ -4,12 +4,18 @@ export class Meal {
       this[key] = data[key];
     });
     this.isActive = false;
+    this.sideDishes = [];
   }
 
-  static toList(values) {
+  static toList(values, sideDishes) {
     const newArray = [];
+    console.log(sideDishes.data);
     values.forEach((value) => {
-      newArray.push(new this(value));
+      const meal = new this(value);
+      meal.sideDishes = sideDishes.filter((dish) => {
+        return meal.id === dish.mealId;
+      });
+      newArray.push(meal);
     });
     return newArray;
   }

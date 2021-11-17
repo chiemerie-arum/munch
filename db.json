@@ -154,6 +154,7 @@
           "price": 2.99
         }
       ],
+
       "additionalOptions": [],
       "mealImage": "",
       "restaurantId": 1,
@@ -188,7 +189,7 @@
       ],
       "additionalOptions": [],
       "mealImage": "",
-      "restaurantId": 2,
+      "restaurantId": 1,
       "price": 15.99
     },
     {
@@ -220,7 +221,7 @@
       ],
       "additionalOptions": [],
       "mealImage": "",
-      "restaurantId": 3,
+      "restaurantId": 1,
       "price": 11.09
     },
     {
@@ -284,8 +285,39 @@
       ],
       "additionalOptions": [],
       "mealImage": "",
-      "restaurantId": 3,
+      "restaurantId": 1,
       "price": 16.99
+    }
+  ],
+  "side-dish": [
+    {
+      "type": "extra",
+      "name": "Your extras",
+      "options": [
+        { "name": "Extra beef (100g)", "price": 2.54 },
+        { "name": "Extra chicken (150g)", "price": 3.59 },
+        { "name": "Extra bacon (150g)", "price": 1.59 }
+      ],
+      "mealId": 1
+    },
+    {
+      "type": "extra",
+      "name": "Your extras",
+      "options": [
+        { "name": "Extra rice", "price": 3.54 },
+        { "name": "Extra beans", "price": 4.99 },
+        { "name": "Extra curry", "price": 1.59 }
+      ],
+      "mealId": 1
+    },
+    {
+      "type": "option",
+      "name": "Choice of potatos",
+      "mealId": 2,
+      "options": [
+        { "name": "Sweet potatos", "price": 2.54 },
+        { "name": "Irish potatos", "price": 1.54 }
+      ]
     }
   ]
 }
