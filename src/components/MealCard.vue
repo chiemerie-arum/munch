@@ -23,37 +23,63 @@
       </div>
     </div>
     <div v-if="meal.isActive" class="side-dish" ref="sideDish">
-      <template>
-        <v-container fluid>
+      <div class="side-dish-container">
+        <v-container>
           <div
             v-for="(sideDish, index) in meal.sideDishes"
-            :key="sideDish.id + index"
+            :key="sideDish.name + index"
             class="mb-5"
           >
             <label>{{ sideDish.name }}</label>
-            <v-checkbox
-              v-for="option in sideDish.options"
-              :key="meal.id + option.name"
-              dense
-              hide-details
-              v-model="extras"
-              :label="option.name"
-              :value="option.name"
-            ></v-checkbox>
+            <span
+              ><v-checkbox
+                class="my-checkbox"
+                v-for="option in sideDish.options"
+                :key="meal.id + option.name"
+                dense
+                hide-details
+                v-model="extras"
+                :label="
+                  option.name +
+                  `  ${option.price === 0 ? `` : `(${option.price}€)`} `
+                "
+                :value="option.name"
+              >
+                <span v-if="option.price">
+                  ({{ option.price }})</span
+                ></v-checkbox
+              >
+            </span>
           </div>
         </v-container>
-      </template>
+        <div class="quantity-price mb-10">
+          <div class="quantity">
+            <v-icon @click="decrementQuantity" right> mdi-minus </v-icon>
+            <span>{{ quantity }}</span>
+            <v-icon @click="incrementQuantity" right> mdi-plus </v-icon>
+          </div>
+          <v-btn dark width="415" height="38" color="#125fca">
+            {{ tempPrice }}€</v-btn
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { create, all } from "mathjs";
+const config = {};
+const math = create(all, config);
+
 export default {
   name: "MealCard",
   data() {
     return {
       extras: [],
       selectedElement: null,
+      quantity: 1,
+      tempPrice: 0,
     };
   },
   props: {
@@ -62,16 +88,30 @@ export default {
       requied: true,
     },
   },
+  mounted() {
+    this.tempPrice = this.meal.price;
+  },
   methods: {
     toggleSideDishes() {
-      const el = this.$refs.card;
-      let currState = this.meal.isActive;
-      this.$store.dispatch("meal/setMealsInactive");
-      this.meal.isActive = !currState;
-      console.log(el);
-      if (this.selectedElement !== el) {
-        this.scrollToTargetAdjusted(el);
-        this.selectedElement = el;
+      if (this.meal.sideDishes.length) {
+        // const el = this.$refs.card;
+        let currState = this.meal.isActive;
+        this.$store.dispatch("meal/setMealsInactive");
+        this.meal.isActive = !currState;
+        // if (this.selectedElement !== el) {
+        //   this.scrollToTargetAdjusted(el);
+        //   this.selectedElement = el;
+        // }
+      }
+    },
+    incrementQuantity() {
+      this.tempPrice = math.round(this.tempPrice + this.meal.price, 2);
+      return (this.quantity += 1);
+    },
+    decrementQuantity() {
+      if (this.quantity > 1) {
+        this.tempPrice = math.round(this.tempPrice - this.meal.price, 2);
+        return (this.quantity -= 1);
       }
     },
     scrollToTargetAdjusted(el) {
@@ -102,11 +142,6 @@ export default {
   margin-bottom: 20px;
   color: #0a3847;
 
-  &:hover {
-    background-color: rgb(145, 184, 207, 0.2);
-    cursor: pointer;
-  }
-
   &__description {
     color: #666;
     font-size: 13px;
@@ -121,6 +156,10 @@ export default {
 
   &__details {
     width: 100%;
+    &:hover {
+      background-color: rgb(145, 184, 207, 0.2);
+      cursor: pointer;
+    }
   }
 
   &__logo {
@@ -149,7 +188,14 @@ export default {
   .meal__price {
     color: #f86600;
   }
+  .side-dish-container {
+    width: 600px;
+    margin: auto;
+  }
   .side-dish {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 0 18px;
     transition: max-height 0.2s ease-out;
     overflow: hidden;
@@ -170,6 +216,31 @@ export default {
 
   .active:after {
     content: "\02716"; /* Unicode character for "minus" sign (x) */
+  }
+
+  ::v-deep .my-checkbox .v-label {
+    font-size: 12px;
+    display: inline-block;
+  }
+
+  .quantity-price {
+    display: flex;
+    justify-content: space-around;
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 110px;
+      height: 38px;
+      border: 1px solid #d7d7d7;
+      background-color: white;
+
+      span {
+        color: #125fca;
+        font-weight: bold;
+      }
+    }
   }
 }
 </style>

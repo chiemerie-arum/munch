@@ -9,7 +9,6 @@ export class Meal {
 
   static toList(values, sideDishes) {
     const newArray = [];
-    console.log(sideDishes.data);
     values.forEach((value) => {
       const meal = new this(value);
       meal.sideDishes = sideDishes.filter((dish) => {
