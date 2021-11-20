@@ -96,7 +96,6 @@ export default {
         this.extraSideDishes.forEach((dish) => {
           if (dish.name === added[0]) {
             this.basePrice = math.round(dish.price + this.basePrice, 2);
-            console.log();
             this.actualPrice = math.round(
               dish.price * this.quantity + this.actualPrice,
               2
@@ -116,9 +115,11 @@ export default {
         });
       }
     },
+    isActive() {
+      this.resetPrices();
+    },
   },
   mounted() {
-    this.actualPrice = this.meal.price;
     this.meal.sideDishes.forEach((sideDish) => {
       if (sideDish.type === "extra") {
         this.extraSideDishes.push(...sideDish.options);
@@ -127,11 +128,11 @@ export default {
     this.basePrice = this.meal.price;
     this.actualPrice = this.meal.price;
   },
-  // computed: {
-  //   actualPrice() {
-  //     return math.round(this.basePrice, 2);
-  //   },
-  // },
+  computed: {
+    isActive() {
+      return this.meal.isActive;
+    },
+  },
   methods: {
     toggleSideDishes() {
       if (this.meal.sideDishes.length) {
@@ -147,15 +148,19 @@ export default {
     },
     incrementQuantity() {
       this.quantity += 1;
-      // this.basePrice = math.round(this.basePrice * this.quantity, 2);
       this.actualPrice = math.round(this.actualPrice + this.basePrice, 2);
     },
     decrementQuantity() {
       if (this.quantity > 1) {
         this.quantity -= 1;
-        // this.basePrice = math.round(this.basePrice * this.quantity, 2);
         this.actualPrice = math.round(this.actualPrice - this.basePrice, 2);
       }
+    },
+    resetPrices() {
+      this.extras = [];
+      this.basePrice = this.meal.price;
+      this.actualPrice = this.meal.price;
+      this.quantity = 1;
     },
     // scrollToTargetAdjusted(el) {
     //   var element = el;
@@ -181,6 +186,10 @@ export default {
   border-radius: 2px;
   border: 1px solid #ebebeb;
   position: relative;
+  &:hover {
+    background-color: rgb(145, 184, 207, 0.2);
+    cursor: pointer;
+  }
 
   margin-bottom: 20px;
   color: #0a3847;
@@ -200,10 +209,6 @@ export default {
   &__details {
     width: 100%;
     height: 100%;
-    &:hover {
-      background-color: rgb(145, 184, 207, 0.2);
-      cursor: pointer;
-    }
   }
 
   &__logo {
@@ -245,9 +250,10 @@ export default {
     overflow: hidden;
     background-color: #f8f5f2;
     width: 100%;
+    cursor: default;
   }
   .restaurant:after {
-    content: "\02795"; /* Unicode character for "plus" sign (+) */
+    content: "\02795";
     font-size: 20px;
     padding: 10px;
     position: absolute;
@@ -259,7 +265,7 @@ export default {
   }
 
   .active:after {
-    content: "\02716"; /* Unicode character for "minus" sign (x) */
+    content: "\02716";
   }
 
   ::v-deep .my-checkbox .v-label {
