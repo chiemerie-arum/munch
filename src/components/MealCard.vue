@@ -59,7 +59,7 @@
             <v-icon @click="incrementQuantity" right> mdi-plus </v-icon>
           </div>
           <v-btn dark width="415" height="38" color="#125fca">
-            {{ tempPrice }}€</v-btn
+            {{ actualPrice }}€</v-btn
           >
         </div>
       </div>
@@ -77,9 +77,10 @@ export default {
   data() {
     return {
       extras: [],
-      selectedElement: null,
       quantity: 1,
-      tempPrice: 0,
+      basePrice: 0,
+      actualPrice: 0,
+      extraSideDishes: [],
     };
   },
   props: {
@@ -88,9 +89,49 @@ export default {
       requied: true,
     },
   },
-  mounted() {
-    this.tempPrice = this.meal.price;
+  watch: {
+    extras(newExtras, oldExtras) {
+      if (newExtras.length > oldExtras.length) {
+        const added = newExtras.filter((f) => !oldExtras.includes(f));
+        this.extraSideDishes.forEach((dish) => {
+          if (dish.name === added[0]) {
+            this.basePrice = math.round(dish.price + this.basePrice, 2);
+            console.log();
+            this.actualPrice = math.round(
+              dish.price * this.quantity + this.actualPrice,
+              2
+            );
+          }
+        });
+      } else {
+        const removed = oldExtras.filter((f) => !newExtras.includes(f));
+        this.extraSideDishes.forEach((dish) => {
+          if (dish.name === removed[0]) {
+            this.basePrice = math.round(this.basePrice - dish.price, 2);
+            this.actualPrice = math.round(
+              this.actualPrice - dish.price * this.quantity,
+              2
+            );
+          }
+        });
+      }
+    },
   },
+  mounted() {
+    this.actualPrice = this.meal.price;
+    this.meal.sideDishes.forEach((sideDish) => {
+      if (sideDish.type === "extra") {
+        this.extraSideDishes.push(...sideDish.options);
+      }
+    });
+    this.basePrice = this.meal.price;
+    this.actualPrice = this.meal.price;
+  },
+  // computed: {
+  //   actualPrice() {
+  //     return math.round(this.basePrice, 2);
+  //   },
+  // },
   methods: {
     toggleSideDishes() {
       if (this.meal.sideDishes.length) {
@@ -105,26 +146,28 @@ export default {
       }
     },
     incrementQuantity() {
-      this.tempPrice = math.round(this.tempPrice + this.meal.price, 2);
-      return (this.quantity += 1);
+      this.quantity += 1;
+      // this.basePrice = math.round(this.basePrice * this.quantity, 2);
+      this.actualPrice = math.round(this.actualPrice + this.basePrice, 2);
     },
     decrementQuantity() {
       if (this.quantity > 1) {
-        this.tempPrice = math.round(this.tempPrice - this.meal.price, 2);
-        return (this.quantity -= 1);
+        this.quantity -= 1;
+        // this.basePrice = math.round(this.basePrice * this.quantity, 2);
+        this.actualPrice = math.round(this.actualPrice - this.basePrice, 2);
       }
     },
-    scrollToTargetAdjusted(el) {
-      var element = el;
-      var headerOffset = 65;
-      var elementPosition = element.getBoundingClientRect().top;
-      var offsetPosition = elementPosition - headerOffset;
+    // scrollToTargetAdjusted(el) {
+    //   var element = el;
+    //   var headerOffset = 65;
+    //   var elementPosition = element.getBoundingClientRect().top;
+    //   var offsetPosition = elementPosition - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    },
+    //   window.scrollTo({
+    //     top: offsetPosition,
+    //     behavior: "smooth",
+    //   });
+    // },
   },
 };
 </script>
@@ -156,6 +199,7 @@ export default {
 
   &__details {
     width: 100%;
+    height: 100%;
     &:hover {
       background-color: rgb(145, 184, 207, 0.2);
       cursor: pointer;

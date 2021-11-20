@@ -26,7 +26,6 @@ export default {
           (meal) => meal.restaurantId === Number(restaurantId)
         );
         meals = Meal.toList(meals, sideDishes.data);
-        console.log(meals);
 
         await commit("SET_MEALS", meals);
       } catch (error) {

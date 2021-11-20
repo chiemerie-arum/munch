@@ -313,6 +313,15 @@
     {
       "type": "option",
       "name": "Choice of potatos",
+      "mealId": 1,
+      "options": [
+        { "name": "Sweet potatos", "price": 2.54 },
+        { "name": "Irish potatos", "price": 1.54 }
+      ]
+    },
+    {
+      "type": "option",
+      "name": "Choice of potatos",
       "mealId": 2,
       "options": [
         { "name": "Sweet potatos", "price": 2.54 },
